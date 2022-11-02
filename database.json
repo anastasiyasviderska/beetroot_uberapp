@@ -1,0 +1,1 @@
+{"admin": {"username": "admin", "password": "12345", "role": "Admin"}, "vova": {"username": "vova", "password": "12345", "role": "Driver"}, "ana": {"username": "ana", "password": "12345", "role": "Passenger"}}
