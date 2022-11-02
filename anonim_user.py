@@ -1,7 +1,8 @@
 from basic_user import BasicUser
 
+
 class AnonimUser(BasicUser):
-    def draw_menu(self) -> dict:
+    def draw_menu(self):
         menu = f"\n{'-'*40}\n\n1. Sign In\n2. Sign Up\n"
         try:
             selected_menu = int(input(menu))

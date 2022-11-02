@@ -11,7 +11,7 @@ user = AnonimUser()
 while True:
     user_dict = user.draw_menu()
     print(user_dict)
-    if not user_dict is None:
+    if user_dict is not None:
         match user_dict['role']:
             case 'Driver':
                 user = Driver()

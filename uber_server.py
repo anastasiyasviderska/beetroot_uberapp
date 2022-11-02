@@ -6,7 +6,7 @@ class Server:
         self.main_db_path = db_path + '.json'
         self.orders_db_path = db_path + '_orders.json'
     
-    def sign_in(self, login: str, password: str) -> dict:
+    def sign_in(self, login: str, password: str):
         print(f"searching user with login: {login}")
         users = self.read_db()
         if login in users:
@@ -52,7 +52,6 @@ class Server:
             json.dump(data, file_object)
             file_object.truncate()
         file_object.close()
-
 
     def read_db(self) -> dict:
         try:

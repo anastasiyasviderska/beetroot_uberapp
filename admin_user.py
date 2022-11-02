@@ -1,10 +1,10 @@
 from basic_user import BasicUser
 from uber_server import Server
 
-class AdminUser(BasicUser):
-    
 
-    def draw_menu(self) -> dict:
+class AdminUser(BasicUser):
+
+    def draw_menu(self):
         menu = f"\n{'-'*40}\n\nHello Admin {self.username}\n1. See all users\n2. Sign Out\n"
         try:
             selected_menu = int(input(menu))

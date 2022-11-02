@@ -1,7 +1,8 @@
 from basic_user import BasicUser
 
+
 class Passenger(BasicUser):
-    def draw_menu(self) -> dict:
+    def draw_menu(self):
         menu = f"\n{'-'*40}\n\nHello Passenger {self.username}\n1. Sign Out\n2. Place an Order\n3. List of Orders\n"
         try:
             selected_menu = int(input(menu))

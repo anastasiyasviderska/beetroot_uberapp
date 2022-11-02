@@ -1,5 +1,6 @@
 from uber_server import Server
 
+
 class BasicUser:
 
     uber_server = Server('database')
