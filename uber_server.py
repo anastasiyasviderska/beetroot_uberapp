@@ -1,6 +1,7 @@
 import json
 
-class Server: 
+
+class Server:
     def __init__(self, db_path: str) -> None:
         self.main_db_path = db_path + '.json'
         self.orders_db_path = db_path + '_orders.json'
@@ -23,7 +24,7 @@ class Server:
         user = {'username': username, 'password': password, 'role': role}
         self.write_db(user)
         return user
-    
+
     def get_all_users(self) -> dict:
         return self.read_db()
     
