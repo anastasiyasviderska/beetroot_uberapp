@@ -5,7 +5,7 @@ class Server:
         self.main_db_path = db_path + '.json'
         self.orders_db_path = db_path + '_orders.json'
     
-    def sign_in(self, login, password) -> dict:
+    def sign_in(self, login: str, password: str) -> dict:
         print(f"searching user with login: {login}")
         users = self.read_db()
         if login in users:
@@ -19,7 +19,7 @@ class Server:
             print("Login does not exist")
         return None
 
-    def sign_up(self, username, password, role) -> dict:
+    def sign_up(self, username: str, password: str, role: str) -> dict:
         user = {'username': username, 'password': password, 'role': role}
         self.write_db(user)
         return user
@@ -27,16 +27,32 @@ class Server:
     def get_all_users(self) -> dict:
         return self.read_db()
     
-    def sign_out(self, username) -> dict:
+    def sign_out(self, username: str) -> dict:
         return {'role': 'Anonim'}
     
-    def create_new_order(self, username, start_location, destination, price) -> None:
+    def create_new_order(self, username: str, start_location: str, destination: str, price: str) -> None:
         self.write_order_db({'start_location': start_location, 'username': username, 'destination': destination, 'price': price, 'order_status': 'created'})
     
-    def get_user_orders(self, username) -> list:
+    def get_user_orders(self, username: str) -> list:
         all_orders = self.read_order_db()
         return list(filter(lambda order: order['username'] == username, all_orders))
         
+    def get_available_orders(self) -> list:
+        all_orders = self.read_order_db()
+        return list(filter(lambda order: order['order_status'] == 'created', all_orders))
+    
+    def execute_order(self, username: str, start_location: str, destination: str, price: str) -> None:
+        with open (self.orders_db_path, 'r+') as file_object:
+            data = json.load(file_object)
+            for order_dict in data:
+                if order_dict['username'] == username and order_dict['start_location'] == start_location and order_dict['destination'] == destination and order_dict['price'] == price:
+                    order_dict['order_status'] = 'executed'
+            file_object.seek(0)
+            json.dump(data, file_object)
+            file_object.truncate()
+        file_object.close()
+
+
     def read_db(self) -> dict:
         try:
             with open (self.main_db_path) as file_object:
