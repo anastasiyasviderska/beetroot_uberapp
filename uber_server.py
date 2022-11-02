@@ -27,13 +27,16 @@ class Server:
     def get_all_users(self) -> dict:
         return self.read_db()
     
-    def sign_out(self, username) ->dict:
+    def sign_out(self, username) -> dict:
         return {'role': 'Anonim'}
     
     def create_new_order(self, username, start_location, destination, price) -> None:
         self.write_order_db({'start_location': start_location, 'username': username, 'destination': destination, 'price': price, 'order_status': 'created'})
+    
+    def get_user_orders(self, username) -> list:
+        all_orders = self.read_order_db()
+        return list(filter(lambda order: order['username'] == username, all_orders))
         
-
     def read_db(self) -> dict:
         try:
             with open (self.main_db_path) as file_object:
