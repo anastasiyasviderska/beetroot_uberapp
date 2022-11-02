@@ -75,7 +75,7 @@ class Server:
 
     def read_order_db(self) -> list:
         try:
-            with open (self.orders_db_path) as file_object:
+            with open(self.orders_db_path) as file_object:
                 log_det = json.load(file_object)
                 return log_det
         except FileNotFoundError:
@@ -98,3 +98,4 @@ class Server:
                 json.dump([dict], file_object)
             file_object.close()
             return {}
+
