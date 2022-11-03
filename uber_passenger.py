@@ -3,7 +3,8 @@ from basic_user import BasicUser
 
 class Passenger(BasicUser):
     def draw_menu(self):
-        menu = f"\n{'-'*40}\n\nHello Passenger {self.username}\n1. Sign Out\n2. Place an Order\n3. List of Orders\n"
+        menu = f"\n{'-'*40}\n\nHello Passenger {self.username}\n1. Sign Out\n2. Place an Order\n3. " \
+               f"List of Orders\n4. Exit\n"
         try:
             selected_menu = int(input(menu))
             match selected_menu:
@@ -20,6 +21,8 @@ class Passenger(BasicUser):
                     for order in user_orders:
                         print(f"from: {order['start_location']} to: {order['destination']} price: {order['price']} status: {order['order_status']}")
                     return None
+                case 4:
+                    exit()
 
         except ValueError:
             return self

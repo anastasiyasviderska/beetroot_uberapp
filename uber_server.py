@@ -12,7 +12,6 @@ class Server:
         if login in users:
             user_dict = users[login]
             if password == user_dict['password']:
-                print(f"Found: {user_dict}")
                 return user_dict
             else:
                 print("Your Password is Incorrect")
@@ -44,7 +43,7 @@ class Server:
         return list(filter(lambda order: order['order_status'] == 'created', all_orders))
     
     def execute_order(self, username: str, start_location: str, destination: str, price: str) -> None:
-        with open (self.orders_db_path, 'r+') as file_object:
+        with open(self.orders_db_path, 'r+') as file_object:
             data = json.load(file_object)
             for order_dict in data:
                 if order_dict['username'] == username and order_dict['start_location'] == start_location and\
@@ -88,7 +87,7 @@ class Server:
 
     def write_order_db(self, order: dict):
         try:
-            with open (self.orders_db_path, 'r+') as file_object:
+            with open(self.orders_db_path, 'r+') as file_object:
                 data = json.load(file_object)
                 data.append(order)
                 file_object.seek(0)
@@ -96,7 +95,7 @@ class Server:
                 file_object.truncate()
             file_object.close()
         except FileNotFoundError:
-            with open (self.orders_db_path, 'w') as file_object:
+            with open(self.orders_db_path, 'w') as file_object:
                 json.dump([dict], file_object, indent=4)
             file_object.close()
             return {}

@@ -3,7 +3,7 @@ from basic_user import BasicUser
 
 class AnonimUser(BasicUser):
     def draw_menu(self):
-        menu = f"\n{'-'*40}\n\n1. Sign In\n2. Sign Up\n"
+        menu = f"\n{'-'*40}\n\n1. Sign In\n2. Sign Up\n3. Exit\n"
         try:
             selected_menu = int(input(menu))
             match selected_menu:
@@ -15,6 +15,8 @@ class AnonimUser(BasicUser):
                     username = input('Please enter your username: ')
                     password = input('Please enter your password: ')
                     role = input("Please enter your role 'Driver' or 'Passenger': ")
-                    return self.uber_server.sign_up(username, password, role)              
+                    return self.uber_server.sign_up(username, password, role)
+                case 3:
+                    exit()
         except ValueError:
             return None

@@ -3,7 +3,7 @@ from basic_user import BasicUser
 
 class Driver(BasicUser):
     def draw_menu(self):
-        menu = f"\n{'-'*40}\n\nHello Driver {self.username}\n1. Sign Out\n2. Available Orders\n"
+        menu = f"\n{'-'*40}\n\nHello Driver {self.username}\n1. Sign Out\n2. Available Orders\n3. Exit\n"
         try:
             selected_menu = int(input(menu))
             match selected_menu:
@@ -21,6 +21,8 @@ class Driver(BasicUser):
                         case _:
                             selected_order = available_orders[selected_index - 2]
                             self.uber_server.execute_order(selected_order['username'],selected_order['start_location'], selected_order['destination'], selected_order['price'])
-                    return None        
+                    return None
+                case 3:
+                    exit()
         except ValueError:
             return None
