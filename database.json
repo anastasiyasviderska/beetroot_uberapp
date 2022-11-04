@@ -2,26 +2,31 @@
     "admin": {
         "username": "admin",
         "password": "12345",
-        "role": "Admin"
+        "role": "Admin",
+        "amount_of_money": "0"
     },
     "vova": {
         "username": "vova",
         "password": "12345",
-        "role": "Driver"
+        "role": "Driver",
+        "amount_of_money": "0"
     },
     "ana": {
         "username": "ana",
         "password": "12345",
-        "role": "Passenger"
+        "role": "Passenger",
+        "amount_of_money": "0"
     },
     "edystang": {
         "username": "edystang",
         "password": "123456",
-        "role": "Passenger"
+        "role": "Passenger",
+        "amount_of_money": "0"
     },
     "edy_the_driver": {
         "username": "edy_the_driver",
         "password": "123456",
-        "role": "Driver"
+        "role": "Driver",
+        "amount_of_money": "0"
     }
 }

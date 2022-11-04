@@ -17,10 +17,12 @@ while True:
                 user = Driver()
                 user.password = user_dict['password']
                 user.username = user_dict['username']
+                user.amount_of_money = int(user_dict['amount_of_money'])
             case 'Passenger':
                 user = Passenger()
                 user.password = user_dict['password']
                 user.username = user_dict['username']
+                user.amount_of_money = int(user_dict['amount_of_money'])
             case 'Admin':
                 user = AdminUser()
                 user.password = user_dict['password']

@@ -4,27 +4,32 @@ default_database = {
     "admin": {
         "username": "admin",
         "password": "12345",
-        "role": "Admin"
+        "role": "Admin",
+        "amount_of_money": "0"
     },
     "vova": {
         "username": "vova",
         "password": "12345",
-        "role": "Driver"
+        "role": "Driver",
+        "amount_of_money": "0"
     },
     "ana": {
         "username": "ana",
         "password": "12345",
-        "role": "Passenger"
+        "role": "Passenger",
+        "amount_of_money": "0"
     },
     "edystang": {
         "username": "edystang",
         "password": "123456",
-        "role": "Passenger"
+        "role": "Passenger",
+        "amount_of_money": "0"
     },
     "edy_the_driver": {
         "username": "edy_the_driver",
         "password": "123456",
-        "role": "Driver"
+        "role": "Driver",
+        "amount_of_money": "0"
     }
 }
 
@@ -33,6 +38,7 @@ with open('database.json', 'w') as jsonfile:
 
 default_database_orders = [
     {
+        "id": 1,
         "start_location": "home",
         "username": "ana",
         "destination": "jim",
@@ -40,6 +46,7 @@ default_database_orders = [
         "order_status": "executed"
     },
     {
+        "id": 2,
         "start_location": "home",
         "username": "ana",
         "destination": "university",
@@ -47,6 +54,7 @@ default_database_orders = [
         "order_status": "created"
     },
     {
+        "id": 3,
         "start_location": "home",
         "username": "edystang",
         "destination": "work",

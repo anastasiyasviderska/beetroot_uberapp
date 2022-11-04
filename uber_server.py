@@ -2,6 +2,8 @@ import json
 
 
 class Server:
+    id_iter = 0
+
     def __init__(self, db_path: str) -> None:
         self.main_db_path = db_path + '.json'
         self.orders_db_path = db_path + '_orders.json'
@@ -31,7 +33,8 @@ class Server:
         return {'role': 'Anonim'}
     
     def create_new_order(self, username: str, start_location: str, destination: str, price: str) -> None:
-        self.write_order_db({'start_location': start_location, 'username': username,
+        self.id_iter += 1
+        self.write_order_db({'id': self.id_iter, 'start_location': start_location, 'username': username,
                              'destination': destination, 'price': price, 'order_status': 'created'})
     
     def get_user_orders(self, username: str) -> list:
@@ -42,17 +45,15 @@ class Server:
         all_orders = self.read_order_db()
         return list(filter(lambda order: order['order_status'] == 'created', all_orders))
     
-    def execute_order(self, username: str, start_location: str, destination: str, price: str) -> None:
+    def execute_order(self, id: int) -> None:
         with open(self.orders_db_path, 'r+') as file_object:
             data = json.load(file_object)
             for order_dict in data:
-                if order_dict['username'] == username and order_dict['start_location'] == start_location and\
-                        order_dict['destination'] == destination and order_dict['price'] == price:
+                if order_dict['id'] == id:
                     order_dict['order_status'] = 'executed'
             file_object.seek(0)
             json.dump(data, file_object, indent=4)
             file_object.truncate()
-        file_object.close()
 
     def read_db(self) -> dict:
         try:

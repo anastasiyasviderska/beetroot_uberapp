@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "start_location": "home",
         "username": "ana",
         "destination": "jim",
@@ -7,6 +8,7 @@
         "order_status": "executed"
     },
     {
+        "id": 2,
         "start_location": "home",
         "username": "ana",
         "destination": "university",
@@ -14,6 +16,7 @@
         "order_status": "created"
     },
     {
+        "id": 3,
         "start_location": "home",
         "username": "edystang",
         "destination": "work",
