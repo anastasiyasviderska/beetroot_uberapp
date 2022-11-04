@@ -43,7 +43,7 @@ default_database_orders = [
         "username": "ana",
         "destination": "jim",
         "price": "14",
-        "order_status": "executed"
+        "order_status": "created"
     },
     {
         "id": 2,
@@ -59,9 +59,12 @@ default_database_orders = [
         "username": "edystang",
         "destination": "work",
         "price": "77",
-        "order_status": "executed"
+        "order_status": "created"
     }
 ]
+
+with open('remember_last_id.txt', 'w') as last_id_file:
+    last_id_file.write('3')
 
 with open('database_orders.json', 'w') as jsonfile:
     json.dump(default_database_orders, jsonfile, indent=4)

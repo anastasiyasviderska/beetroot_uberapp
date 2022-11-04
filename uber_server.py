@@ -2,11 +2,11 @@ import json
 
 
 class Server:
-    id_iter = 0
-
     def __init__(self, db_path: str) -> None:
         self.main_db_path = db_path + '.json'
         self.orders_db_path = db_path + '_orders.json'
+        with open('remember_last_id.txt') as last_id_file:
+            self.id_iter = int(last_id_file.read())
     
     def sign_in(self, login: str, password: str):
         print(f"searching user with login: {login}")
@@ -34,6 +34,8 @@ class Server:
     
     def create_new_order(self, username: str, start_location: str, destination: str, price: str) -> None:
         self.id_iter += 1
+        with open('remember_last_id.txt', 'w') as last_id_file:
+            last_id_file.write(str(self.id_iter))
         self.write_order_db({'id': self.id_iter, 'start_location': start_location, 'username': username,
                              'destination': destination, 'price': price, 'order_status': 'created'})
     
