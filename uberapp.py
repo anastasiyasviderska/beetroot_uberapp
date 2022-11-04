@@ -1,7 +1,4 @@
-
-from basic_user import BasicUser
 from anonim_user import AnonimUser
-from uber_server import Server
 from uber_passenger import Passenger
 from uber_driver import Driver
 from admin_user import AdminUser             

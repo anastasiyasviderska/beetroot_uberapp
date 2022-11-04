@@ -5,7 +5,7 @@
         "username": "ana",
         "destination": "jim",
         "price": "14",
-        "order_status": "executed"
+        "order_status": "created"
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@
         "username": "ana",
         "destination": "university",
         "price": "40",
-        "order_status": "executed"
+        "order_status": "created"
     },
     {
         "id": 3,
@@ -21,30 +21,6 @@
         "username": "edystang",
         "destination": "work",
         "price": "77",
-        "order_status": "executed"
-    },
-    {
-        "id": 4,
-        "start_location": "gym",
-        "username": "edystang",
-        "destination": "home",
-        "price": "55",
-        "order_status": "created"
-    },
-    {
-        "id": 5,
-        "start_location": "zone 51",
-        "username": "edystang",
-        "destination": "Dakota",
-        "price": "700",
-        "order_status": "executed"
-    },
-    {
-        "id": 6,
-        "start_location": "home",
-        "username": "edystang",
-        "destination": "pizza",
-        "price": "15",
         "order_status": "created"
     }
 ]

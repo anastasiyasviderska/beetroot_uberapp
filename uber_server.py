@@ -28,8 +28,9 @@ class Server:
 
     def get_all_users(self) -> dict:
         return self.read_db()
-    
-    def sign_out(self, username: str) -> dict:
+
+    @staticmethod
+    def sign_out():
         return {'role': 'Anonim'}
     
     def create_new_order(self, username: str, start_location: str, destination: str, price: str) -> None:

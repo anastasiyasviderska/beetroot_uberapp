@@ -8,7 +8,7 @@ class Driver(BasicUser):
             selected_menu = int(input(menu))
             match selected_menu:
                 case 1:
-                    return self.uber_server.sign_out(self.username)
+                    return self.uber_server.sign_out()
                 case 2:
                     available_orders = self.uber_server.get_available_orders()
                     print(f"\n{'-'*40}\n\n0. Back to Driver menu")

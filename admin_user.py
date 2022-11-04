@@ -1,5 +1,4 @@
 from basic_user import BasicUser
-from uber_server import Server
 
 
 class AdminUser(BasicUser):
@@ -13,6 +12,6 @@ class AdminUser(BasicUser):
                     print(self.uber_server.get_all_users())
                     return None
                 case 2:
-                    return self.uber_server.sign_out(self.username)          
+                    return self.uber_server.sign_out()
         except ValueError:
             return None

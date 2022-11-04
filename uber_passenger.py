@@ -9,7 +9,7 @@ class Passenger(BasicUser):
             selected_menu = int(input(menu))
             match selected_menu:
                 case 1:
-                    return self.uber_server.sign_out(self.username)
+                    return self.uber_server.sign_out()
                 case 2:
                     start_location = input('Please enter your start location: ')
                     destination = input('Please enter your destination: ')
