@@ -4,7 +4,7 @@ import json
 
 class Driver(BasicUser):
     def draw_menu(self):
-        menu = f"\n{'-' * 40}\n\nHello Driver {self.username}\n1. Sign Out\n2. Available Orders\n3. Income\n4. Exit\n"
+        menu = f"\n{'-' * 40}\n\nHello Driver {self.username}\n1. Sign Out\n2. Available Orders\n3. Income\n4. Executed Orders\n5. Exit\n"
         try:
             selected_menu = int(input(menu))
             match selected_menu:
@@ -23,11 +23,18 @@ class Driver(BasicUser):
                         case _:
                             self.raise_income_in_orders(selected_id)
                             self.update_money_in_db()
-                            self.uber_server.execute_order(selected_id)
+                            self.uber_server.execute_order(selected_id, self.username)
                     return None
                 case 3:
                     print(f"Your income is: {self.amount_of_money}")
                 case 4:
+                    executed_orders = self.uber_server.get_executed_orders(self.username)
+                    print(f"\n{'-' * 40}\n")
+                    for order in executed_orders:
+                        print(f"id: {order['id']}. from: {order['start_location']} to: {order['destination']}"
+                              f" price: {order['price']} status: {order['order_status']}")
+                    return None
+                case 5:
                     exit()
         except ValueError:
             return None

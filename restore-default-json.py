@@ -51,7 +51,8 @@ default_database_orders = [
         "username": "ana",
         "destination": "university",
         "price": "40",
-        "order_status": "created"
+        "order_status": "executed",
+        "driver_username": "vova"
     },
     {
         "id": 3,
