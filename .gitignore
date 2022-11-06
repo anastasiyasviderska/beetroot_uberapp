@@ -1,1 +1,5 @@
 __pycache__
+.idea
+database.json
+database_orders.json
+restore-default-json.py
