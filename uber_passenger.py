@@ -44,14 +44,17 @@ class Passenger(BasicUser):
                         print(f"id: {order['id']} from {order['start_location']} to: {order['destination']}"
                               f" price: {order['price']} driver's name: {order['driver_username']}")
 
-                    order_to_rate = input("Please choose the id of the ride that you want to rate or go back: ")
-                    while order_to_rate not in set_of_orders:
-                        if order_to_rate == '0':
-                            break
-                        print("You typed a wrong id!")
+                    if len(set_of_orders) != 0:
                         order_to_rate = input("Please choose the id of the ride that you want to rate or go back: ")
-                    if order_to_rate != '0':
-                        self.rate_a_driver(order_to_rate)
+                        while order_to_rate not in set_of_orders:
+                            if order_to_rate == '0':
+                                break
+                            print("You typed a wrong id!")
+                            order_to_rate = input("Please choose the id of the ride that you want to rate or go back: ")
+                        if order_to_rate != '0':
+                            self.rate_a_driver(order_to_rate)
+                    else:
+                        print("You don't have any orders unrated!")
                     return None
                 case 5:
                     self.add_money_to_balance()
