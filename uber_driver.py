@@ -3,8 +3,10 @@ import json
 
 
 class Driver(BasicUser):
+
     def draw_menu(self):
-        menu = f"\n{'-' * 40}\n\nHello Driver {self.username}\n1. Sign Out\n2. Available Orders\n3. Income\n4. Executed Orders\n5. Exit\n"
+        menu = f"\n{'-' * 40}\n\nHello Driver {self.username}\n1. Sign Out\n2. Available Orders\n3. Income\n" \
+               f"4. Executed Orders\n5. Exit\n"
         try:
             selected_menu = int(input(menu))
             match selected_menu:
@@ -48,6 +50,4 @@ class Driver(BasicUser):
                         self.amount_of_money += int(order_dict['price'])
                     else:
                         print("This order is already executed!")
-
-
 

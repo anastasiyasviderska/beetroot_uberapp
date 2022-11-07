@@ -5,7 +5,7 @@ import json
 class Passenger(BasicUser):
     def draw_menu(self):
         menu = f"\n{'-'*40}\n\nHello Passenger {self.username}\n1. Sign Out\n2. Place an Order\n3. " \
-               f"List of Orders\n4. Add money\n5. See balance\n6. Exit\n"
+               f"List of Orders\n4. Rate a driver\n5. Add money\n6. See balance\n7. Exit\n"
         try:
             selected_menu = int(input(menu))
             match selected_menu:
@@ -32,11 +32,33 @@ class Passenger(BasicUser):
                         print(f"from: {order['start_location']} to: {order['destination']} price: {order['price']} status: {order['order_status']}")
                     return None
                 case 4:
+                    executed_orders = self.uber_server.get_executed_orders(self.username)
+                    print(f"\n{'-' * 40}\n")
+                    print("List of your unrated uber rides:")
+                    set_of_orders = set()
+                    print("0. Go back")
+                    for order in executed_orders:
+                        if order["is_rated"] == "rated":
+                            continue
+                        set_of_orders.add(str(order["id"]))
+                        print(f"id: {order['id']} from {order['start_location']} to: {order['destination']}"
+                              f" price: {order['price']} driver's name: {order['driver_username']}")
+
+                    order_to_rate = input("Please choose the id of the ride that you want to rate or go back: ")
+                    while order_to_rate not in set_of_orders:
+                        if order_to_rate == '0':
+                            break
+                        print("You typed a wrong id!")
+                        order_to_rate = input("Please choose the id of the ride that you want to rate or go back: ")
+                    if order_to_rate != '0':
+                        self.rate_a_driver(order_to_rate)
+                    return None
+                case 5:
                     self.add_money_to_balance()
                     self.update_money_in_db()
-                case 5:
-                    print(f"Your balance is {self.amount_of_money}")
                 case 6:
+                    print(f"Your balance is {self.amount_of_money}")
+                case 7:
                     exit()
 
         except ValueError:
@@ -53,6 +75,33 @@ class Passenger(BasicUser):
     def pay_order(self, order_price):
         self.amount_of_money -= order_price
 
+    @staticmethod
+    def rate_a_driver(index_of_order):
+        number_of_stars = 0
+        while not 1 <= number_of_stars <= 5:
+            number_of_stars = int(input("Please rate the chosen ride with a number from 1 to 5: "))
 
+        driver_username = None
+        with open("database_orders.json", 'r+') as orders_db:
+            orders_dict = json.load(orders_db)
+            for order in orders_dict:
+                if order["id"] == int(index_of_order):
+                    order["is_rated"] = "rated"
+                    driver_username = order["driver_username"]
 
+            orders_db.seek(0)
+            json.dump(orders_dict, orders_db, indent=4)
+            orders_db.truncate()
+
+        with open("database.json", 'r+') as drivers_db:
+            data = json.load(drivers_db)
+            # print(data[driver_username])
+            data[driver_username]['number_of_ratings'] += 1
+            number_of_ratings = data[driver_username]['number_of_ratings']
+            rating_sum = float(data[driver_username]['rating']) * (number_of_ratings - 1) + number_of_stars
+            data[driver_username]['rating'] = f"{rating_sum / number_of_ratings:.2f}"
+
+            drivers_db.seek(0)
+            json.dump(data, drivers_db, indent=4)
+            drivers_db.truncate()
 
