@@ -29,14 +29,13 @@ class Passenger(BasicUser):
                 case 3:
                     user_orders = self.uber_server.get_user_orders(self.username)
                     for order in user_orders:
-                        print(f"from: {order['start_location']} to: {order['destination']} price: {order['price']} status: {order['order_status']}")
+                        print(f"id: {order['id']}, from: {order['start_location']} to: {order['destination']} price: {order['price']} status: {order['order_status']}")
                     return None
                 case 4:
                     executed_orders = self.uber_server.get_executed_orders(self.username)
                     print(f"\n{'-' * 40}\n")
                     print("List of your unrated uber rides:")
                     set_of_orders = set()
-                    print("0. Go back")
                     for order in executed_orders:
                         if order["is_rated"] == "rated":
                             continue
@@ -45,6 +44,7 @@ class Passenger(BasicUser):
                               f" price: {order['price']} driver's name: {order['driver_username']}")
 
                     if len(set_of_orders) != 0:
+                        print("id: 0. Go back")
                         order_to_rate = input("Please choose the id of the ride that you want to rate or go back: ")
                         while order_to_rate not in set_of_orders:
                             if order_to_rate == '0':

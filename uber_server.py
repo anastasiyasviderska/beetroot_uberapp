@@ -49,7 +49,9 @@ class Server:
 
     def get_user_orders(self, username: str) -> list:
         all_orders = self.read_order_db()
-        return list(filter(lambda order: order['username'] == username, all_orders))
+        list_of_orders = list(filter(lambda order: order['username'] == username, all_orders))
+        list_of_orders.reverse()
+        return list_of_orders
 
     def get_available_orders(self) -> list:
         all_orders = self.read_order_db()
