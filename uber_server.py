@@ -25,9 +25,10 @@ class Server:
     def sign_up(self, username: str, password: str, role: str) -> dict:
         if role == 'Driver':
             user = {'username': username, 'password': password, 'role': role,
-                    'rating_sum': 0, 'rating': 0}
+                    'amount_of_money': 0, 'rating_sum': 0, 'rating': 0}
         else:
-            user = {'username': username, 'password': password, 'role': role}
+            user = {'username': username, 'password': password, 'role': role,
+                    'amount_of_money': 0}
         self.write_db(user)
         return user
 
