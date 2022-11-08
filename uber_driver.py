@@ -11,7 +11,7 @@ class Driver(BasicUser):
             selected_menu = int(input(menu))
             match selected_menu:
                 case 1:
-                    return self.uber_server.sign_out()
+                    return self.uber_server.sign_out(self.username)
                 case 2:
                     available_orders = self.uber_server.get_available_orders()
                     print(f"\n{'-' * 40}\n\n0. Back to Driver menu")
@@ -37,6 +37,7 @@ class Driver(BasicUser):
                               f" price: {order['price']} status: {order['order_status']}")
                     return None
                 case 5:
+                    self.uber_server.sign_out(self.username)
                     exit()
         except ValueError:
             return None

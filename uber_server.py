@@ -14,6 +14,8 @@ class Server:
         if login in users:
             user_dict = users[login]
             if password == user_dict['password']:
+                user_dict['online_status'] = True
+                self.write_db(user_dict)
                 print(f"Found: {user_dict}")
                 return user_dict
             else:
@@ -25,18 +27,26 @@ class Server:
     def sign_up(self, username: str, password: str, role: str) -> dict:
         if role == 'Driver':
             user = {'username': username, 'password': password, 'role': role,
-                    'amount_of_money': 0, 'rating_sum': 0, 'rating': 0}
+                    'amount_of_money': 0, 'rating_sum': 0, 'rating': 0, 'online_status': True}
         else:
             user = {'username': username, 'password': password, 'role': role,
-                    'amount_of_money': 0}
+                    'amount_of_money': 0, 'online_status': True}
         self.write_db(user)
         return user
 
     def get_all_users(self) -> dict:
         return self.read_db()
+    
+    def get_online_users(self) -> dict:
+        online_users = self.read_db()
+        return dict(filter(lambda user: user[1]['online_status'] == True and user[1]['role'] != 'Admin', online_users.items()))
 
-    @staticmethod
-    def sign_out():
+    def sign_out(self, login):
+        users = self.read_db()
+        if login in users:
+            user_dict = users[login]
+            user_dict['online_status'] = False
+            self.write_db(user_dict)
         return {'role': 'Anonim'}
 
     def create_new_order(self, username: str, start_location: str, destination: str, price: str) -> None:
@@ -56,6 +66,9 @@ class Server:
     def get_available_orders(self) -> list:
         all_orders = self.read_order_db()
         return list(filter(lambda order: order['order_status'] == 'created', all_orders))
+    
+    def delete_user(self, username):
+        pass
 
     def execute_order(self, id: int, driver_username: str) -> None:
         with open(self.orders_db_path, 'r+') as file_object:
@@ -75,6 +88,7 @@ class Server:
                                          and (order['driver_username'] == username
                                               or order['username'] == username), all_orders))
 
+
     def read_db(self) -> dict:
         try:
             with open(self.main_db_path) as file_object:
@@ -93,6 +107,15 @@ class Server:
             file_object.seek(0)
             json.dump(data, file_object, indent=4)
             file_object.truncate()
+
+    def delete_db_item(self, username: str) -> None:
+        with open(self.main_db_path, 'r+') as file_object:
+            data = json.load(file_object)
+            data.pop(username)
+            file_object.seek(0)
+            json.dump(data, file_object, indent=4)
+            file_object.truncate()
+
 
     def read_order_db(self):
         try:

@@ -10,13 +10,15 @@ default_database = {
         "username": "ana",
         "password": "12345",
         "role": "Passenger",
-        "amount_of_money": "0"
+        "amount_of_money": "0",
+        "online_status": False
     },
     "edystang": {
         "username": "edystang",
         "password": "123456",
         "role": "Passenger",
-        "amount_of_money": "0"
+        "amount_of_money": "0",
+        "online_status": False
     },
     "edy_the_driver": {
         "username": "edy_the_driver",
@@ -24,7 +26,8 @@ default_database = {
         "role": "Driver",
         "amount_of_money": "0",
         "rating": 0,
-        "number_of_ratings": 0
+        "number_of_ratings": 0,
+        "online_status": False
     }
 }
 

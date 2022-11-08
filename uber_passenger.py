@@ -10,7 +10,7 @@ class Passenger(BasicUser):
             selected_menu = int(input(menu))
             match selected_menu:
                 case 1:
-                    return self.uber_server.sign_out()
+                    return self.uber_server.sign_out(self.username)
                 case 2:
                     start_location = input('Please enter your start location: ')
                     destination = input('Please enter your destination: ')
@@ -62,6 +62,7 @@ class Passenger(BasicUser):
                 case 6:
                     print(f"Your balance is {self.amount_of_money}")
                 case 7:
+                    self.uber_server.sign_out(self.username)
                     exit()
 
         except ValueError:
