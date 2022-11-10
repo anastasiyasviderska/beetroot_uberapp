@@ -24,3 +24,10 @@ class BasicUser:
             users_db.seek(0)
             json.dump(data, users_db, indent=4)
             users_db.truncate()
+
+    def send_message_to_helpdesk(self, user_role):
+        print("Welcome to our Uber Help Desk!")
+        new_title = input("Please type the message's title!\n")
+        new_message = input("Please type your message so that our administrators can help you!\n")
+        self.uber_server.create_new_message(self.username, user_role, new_title, new_message)
+

@@ -74,8 +74,33 @@ default_database_orders = [
     },
 ]
 
-with open('remember_last_id.txt', 'w') as last_id_file:
+with open('remember_last_order_id.txt', 'w') as last_id_file:
     last_id_file.write('4')
 
 with open('database_orders.json', 'w') as jsonfile:
     json.dump(default_database_orders, jsonfile, indent=4)
+
+default_database_help_desk = [
+    {
+        "id": 1,
+        "username": "edy_the_driver",
+        "role": "Driver",
+        "title": "emergency",
+        "message": "we need more drivers",
+        "seen": "no"
+    },
+    {
+        "id": 2,
+        "username": "edystang",
+        "role": "Passenger",
+        "title": "review",
+        "message": "Great app so far",
+        "seen": "no"
+    }
+]
+
+with open('remember_last_msg_id.txt', 'w') as last_id_file:
+    last_id_file.write('2')
+
+with open('database_help_desk.json', 'w') as jsonfile:
+    json.dump(default_database_help_desk, jsonfile, indent=4)
