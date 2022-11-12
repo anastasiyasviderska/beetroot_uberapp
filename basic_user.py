@@ -74,3 +74,23 @@ class BasicUser:
                         print('The password you entered is incorrect.')
                         return None
 
+    def open_help_desk(self):
+        try:
+            choose_new_action = input(f"\n{'-' * 40}\n\n0. Go back\n1. Write a new message\n"
+                                      f"2. See messages sent\n")
+            match int(choose_new_action):
+                case 0:
+                    return None
+                case 1:
+                    with open('database.json', 'r') as users_db:
+                        data = json.load(users_db)
+                        self.send_message_to_helpdesk(data[self.username]['role'])
+                case 2:
+                    user_msg = self.uber_server.get_user_messages(self.username)
+                    for msg in user_msg:
+                        print(f"Message id: {msg['id']}\n"
+                              f"From: {msg['username']}\n"
+                              f"Title: {msg['title']}\n"
+                              f"Message: {msg['message']}\n\n")
+        except TypeError:
+            return None

@@ -5,8 +5,8 @@ import json
 class Driver(BasicUser):
 
     def draw_menu(self):
-        menu = f"\n{'-' * 40}\n\nHello Driver {self.username}\n1. Sign Out\n2. Available Orders\n3. Income\n" \
-               f"4. Executed Orders\n5. Change password\n5. Open Help Desk\n6. Exit\n"
+        menu = f"\n{'-' * 40}\n\nHello Driver {self.username}\n1. Sign Out\n2. Available Orders\n3. See income\n" \
+               f"4. Executed Orders\n5. Change password\n6. Open Help Desk\n7. Exit\n"
         try:
             selected_menu = int(input(menu))
             match selected_menu:
@@ -39,21 +39,7 @@ class Driver(BasicUser):
                 case 5:
                     self.change_password()
                 case 6:
-                    choose_new_action = int(input(f"\n{'-' * 40}\n\n1. Exit\n2. Write a new message\n"
-                                                  f"3. See messages sent\n"))
-                    match choose_new_action:
-                        case 1:
-                            return None
-                        case 2:
-                            self.send_message_to_helpdesk('Driver')
-                        case 3:
-                            user_msg = self.uber_server.get_user_messages(self.username)
-                            for msg in user_msg:
-                                print(f"Message id: {msg['id']}\n"
-                                      f"From: {msg['username']}\n"
-                                      f"Title: {msg['title']}\n"
-                                      f"Message: {msg['message']}\n\n")
-                    return None
+                    self.open_help_desk()
                 case 7:
                     self.uber_server.sign_out(self.username)
                     exit()

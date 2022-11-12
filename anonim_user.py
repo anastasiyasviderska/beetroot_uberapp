@@ -13,6 +13,8 @@ class AnonimUser(BasicUser):
                     return self.uber_server.sign_in(username, password)
                 case 2:
                     role = input("Please enter your role 'Driver' or 'Passenger': ")
+                    while role not in ['Driver', 'Passenger']:
+                        role = input("Please choose between 'Driver' or 'Passenger': ")
                     username = input('Please enter your username: ')
                     all_users_dicts = self.uber_server.get_all_users()
                     while username in all_users_dicts:
