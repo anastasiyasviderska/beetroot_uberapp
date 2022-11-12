@@ -5,7 +5,8 @@ import json
 class Passenger(BasicUser):
     def draw_menu(self):
         menu = f"\n{'-'*40}\n\nHello Passenger {self.username}\n1. Sign Out\n2. Place an Order\n3. " \
-               f"List of Orders\n4. Rate a driver\n5. Add money\n6. See balance\n7. Open Help Desk\n8. Exit\n"
+               f"List of Orders\n4. Rate a driver\n5. Add money\n6. See balance\n7. Change password" \
+               f"\n8. Open Help Desk\n9. Exit\n"
         try:
             selected_menu = int(input(menu))
             match selected_menu:
@@ -62,6 +63,8 @@ class Passenger(BasicUser):
                 case 6:
                     print(f"Your balance is {self.amount_of_money}")
                 case 7:
+                    self.change_password()
+                case 8:
                     choose_new_action = int(input(f"\n{'-'*40}\n\n1. Exit\n2. Write a new message\n"
                                                   f"3. See messages sent\n"))
                     match choose_new_action:
@@ -77,7 +80,7 @@ class Passenger(BasicUser):
                                       f"Title: {msg['title']}\n"
                                       f"Message: {msg['message']}\n\n")
                     return None
-                case 8:
+                case 9:
                     self.uber_server.sign_out(self.username)
                     exit()
 

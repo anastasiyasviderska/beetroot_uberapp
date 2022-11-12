@@ -12,12 +12,12 @@ class AnonimUser(BasicUser):
                     password = input('Please enter your password: ')
                     return self.uber_server.sign_in(username, password)
                 case 2:
+                    role = input("Please enter your role 'Driver' or 'Passenger': ")
                     username = input('Please enter your username: ')
                     all_users_dicts = self.uber_server.get_all_users()
                     while username in all_users_dicts:
                         username = input('That username already exists. Please enter another username: ')
-                    password = input('Please enter your password: ')
-                    role = input("Please enter your role 'Driver' or 'Passenger': ")
+                    password = self.password_generator()
                     return self.uber_server.sign_up(username, password, role)
                 case 3:
                     exit()

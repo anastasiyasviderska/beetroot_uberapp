@@ -6,7 +6,7 @@ class Driver(BasicUser):
 
     def draw_menu(self):
         menu = f"\n{'-' * 40}\n\nHello Driver {self.username}\n1. Sign Out\n2. Available Orders\n3. Income\n" \
-               f"4. Executed Orders\n5. Open Help Desk\n6. Exit\n"
+               f"4. Executed Orders\n5. Change password\n5. Open Help Desk\n6. Exit\n"
         try:
             selected_menu = int(input(menu))
             match selected_menu:
@@ -37,6 +37,8 @@ class Driver(BasicUser):
                               f" price: {order['price']} status: {order['order_status']}")
                     return None
                 case 5:
+                    self.change_password()
+                case 6:
                     choose_new_action = int(input(f"\n{'-' * 40}\n\n1. Exit\n2. Write a new message\n"
                                                   f"3. See messages sent\n"))
                     match choose_new_action:
@@ -52,7 +54,7 @@ class Driver(BasicUser):
                                       f"Title: {msg['title']}\n"
                                       f"Message: {msg['message']}\n\n")
                     return None
-                case 6:
+                case 7:
                     self.uber_server.sign_out(self.username)
                     exit()
         except ValueError:

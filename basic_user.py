@@ -1,5 +1,6 @@
 from uber_server import Server
 import json
+from random_password_generator import random_password_generator
 
 
 class BasicUser:
@@ -30,4 +31,46 @@ class BasicUser:
         new_title = input("Please type the message's title!\n")
         new_message = input("Please type your message so that our administrators can help you!\n")
         self.uber_server.create_new_message(self.username, user_role, new_title, new_message)
+
+    @staticmethod
+    def password_generator():
+        password_type = input('Do you want a randomly generated password? (y/n): ')
+        while password_type not in ['y', 'n']:
+            password_type = input('You entered an invalid option. Please, choose "y" or "n": ')
+        match password_type:
+            case 'n':
+                while True:
+                    password = input('Please enter your new password (4-16 characters): ')
+                    if len(password) < 4:
+                        print('Your password is too short!')
+                        continue
+                    if len(password) > 16:
+                        print('Your password is too long!')
+                        continue
+
+                    password_confirmation = input('Please confirm your password: ')
+                    if password != password_confirmation:
+                        print('Your passwords do not match! Please, try again.')
+                        continue
+                    return password
+
+            case 'y':
+                return random_password_generator()
+
+    def change_password(self):
+        password_identification = input('Please enter your password to continue or press "0" to go back: ')
+        match password_identification:
+            case 0:
+                return None
+            case _:
+                with open('database.json', 'r+') as users_db:
+                    data = json.load(users_db)
+                    if data[self.username]['password'] == password_identification:
+                        data[self.username]['password'] = self.password_generator()
+                        users_db.seek(0)
+                        json.dump(data, users_db, indent=4)
+                        users_db.truncate()
+                    else:
+                        print('The password you entered is incorrect.')
+                        return None
 
