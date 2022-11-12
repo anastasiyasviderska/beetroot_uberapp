@@ -5,8 +5,12 @@ import json
 class Driver(BasicUser):
 
     def draw_menu(self):
-        menu = f"\n{'-' * 40}\n\nHello Driver {self.username}\n1. Sign Out\n2. Available Orders\n3. See income\n" \
-               f"4. Executed Orders\n5. Change password\n6. Open Help Desk\n7. Exit\n"
+        with open('database.json', 'r') as pnm:
+            data = json.load(pnm)
+            rating = data[self.username]['rating']
+
+        menu = f"\n{'-' * 40}\n\nHello Driver {self.username}, rating {rating}\n1. Sign Out\n2. Available Orders" \
+               f"\n3. See income\n4. Executed Orders\n5. Change password\n6. Open Help Desk\n7. Exit\n"
         try:
             selected_menu = int(input(menu))
             match selected_menu:
@@ -15,10 +19,15 @@ class Driver(BasicUser):
                 case 2:
                     available_orders = self.uber_server.get_available_orders()
                     print(f"\n{'-' * 40}\n\n0. Back to Driver menu")
+                    available_ids = ['0']
                     for order in available_orders:
+                        available_ids.append(str(order['id']))
                         print(f"{order['id']}. from: {order['start_location']} to: {order['destination']}"
                               f" price: {order['price']} status: {order['order_status']}")
-                    selected_id = int(input("Please choose order to execute (use index): "))
+                    selected_id = input("Please choose an order to execute (use index): ")
+                    while selected_id not in available_ids:
+                        selected_id = input("Please choose a valid order to execute (use index): ")
+                    selected_id = int(selected_id)
                     match selected_id:
                         case 0:
                             pass

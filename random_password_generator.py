@@ -39,7 +39,12 @@ def random_password_generator():
         try:
             password = ''.join(choices(password_alphabet, k=length))
             repeat = input(f'Your new password is: {password}\nDo you want to keep it?(y/n): ')
-            if repeat == 'y':
-                return password
+            while True:
+                if repeat == 'y':
+                    return password
+                elif repeat == 'n':
+                    break
+                repeat = input('Please, choose between "y" or "n": ')
+
         except IndexError:
             print('You have no characters to make a password. Try again accepting at least one set of characters!\n')

@@ -71,10 +71,10 @@ class Passenger(BasicUser):
                     exit()
 
         except ValueError:
-            return self
+            return None
 
     def add_money_to_balance(self):
-        how_much_money = int(input("Please choose the amount of money you want to add in your account."))
+        how_much_money = int(input("Please choose the amount of money you want to add in your account: "))
         if how_much_money > 0:
             self.amount_of_money += how_much_money
             print(f"Your new balance is {self.amount_of_money}")

@@ -20,7 +20,8 @@ class Server:
             if password == user_dict['password']:
                 user_dict['online_status'] = True
                 self.write_db(user_dict)
-                # print(f"Found: {user_dict}")
+                # if user_dict['role'] == 'Driver':
+                #     print(f"Your rating is {user_dict['rating']}")
                 return user_dict
             else:
                 print("Your Password is Incorrect")
