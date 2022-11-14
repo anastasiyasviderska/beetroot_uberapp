@@ -16,8 +16,9 @@ class Passenger(BasicUser):
                     start_location = input('Please enter your start location: ')
                     destination = input('Please enter your destination: ')
                     price = int(input("Please enter your price: "))
+                    distance = int(input("Please enter distance in km: "))
                     if self.amount_of_money > price > 0:
-                        self.uber_server.create_new_order(self.username, start_location, destination, price)
+                        self.uber_server.create_new_order(self.username, start_location, destination, price, distance)
                         self.pay_order(price)
                         self.update_money_in_db()
                         print("New order created!")

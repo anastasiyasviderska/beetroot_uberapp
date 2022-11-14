@@ -40,7 +40,8 @@ default_database_orders = [
         "start_location": "home",
         "username": "ana",
         "destination": "jim",
-        "price": "14",
+        "price": 14,
+        "distance": 15,
         "order_status": "created",
         "is_rated": "unrated"
     },
@@ -50,6 +51,7 @@ default_database_orders = [
         "username": "ana",
         "destination": "university",
         "price": 40,
+        "distance": 34,
         "order_status": "created",
         "is_rated": "unrated"
 },
@@ -59,6 +61,7 @@ default_database_orders = [
         "username": "edystang",
         "destination": "work",
         "price": 77,
+        "distance": 45,
         "order_status": "created",
         "is_rated": "unrated"
     },
@@ -68,6 +71,7 @@ default_database_orders = [
         "username": "edystang",
         "destination": "mistress",
         "price": 5,
+        "distance": 10,
         "order_status": "executed",
         "is_rated": "rated",
         "driver_username": "edy_the_driver"

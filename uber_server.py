@@ -63,12 +63,12 @@ class Server:
         pass
 
     # ORDERS
-    def create_new_order(self, username: str, start_location: str, destination: str, price: str) -> None:
+    def create_new_order(self, username: str, start_location: str, destination: str, price: int, distance: int) -> None:
         self.id_iter += 1
         with open('remember_last_order_id.txt', 'w') as last_id_file:
             last_id_file.write(str(self.id_iter))
         self.write_order_db({'id': self.id_iter, 'start_location': start_location, 'username': username,
-                             'destination': destination, 'price': price, 'order_status': 'created',
+                             'destination': destination, 'price': price, 'distance': distance, 'order_status': 'created',
                              'is_rated': 'unrated'})
 
     def get_user_orders(self, username: str) -> list:
